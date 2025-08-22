@@ -9,17 +9,13 @@ class Solution {
                 sum += nums[b];
                 b++;
             }
-            else {
-                min = Math.min(min, b-a);
-                sum -= nums[a];
-                a++;
-            }
-        }
-        while (sum >= target) {
+            while (sum >= target) {
             min = Math.min(min, b - a);
             sum -= nums[a];
             a++;
         }
+        }
+        
         return min == Integer.MAX_VALUE ? 0 : min;
     }
 }
