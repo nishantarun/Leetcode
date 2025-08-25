@@ -7,9 +7,7 @@ class Solution {
             int leftWall = height[left];
             int rightWall = height[right];
             int water = (right - left) * (leftWall < rightWall ? leftWall : rightWall);
-            if(maxWater < water){
-                maxWater = water;
-            }
+            maxWater = maxWater < water ? water : maxWater;
             if(leftWall <= rightWall) {
                 left++;
             }
