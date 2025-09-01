@@ -1,10 +1,8 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        int n = nums.length;
-        // There can be at most two majority elements
+        final int n = nums.length;
         int count1 = 0, count2 = 0, candidate1 = 0, candidate2 = 1;
 
-        // Phase 1: Find potential candidates
         for (int num : nums) {
             if (num == candidate1) {
                 count1++;
@@ -22,7 +20,6 @@ class Solution {
             }
         }
 
-        // Phase 2: Verify the candidates
         count1 = 0;
         count2 = 0;
         for (int num : nums) {
@@ -30,9 +27,10 @@ class Solution {
             else if (num == candidate2) count2++;
         }
 
-        List<Integer> res = new ArrayList<>();
+        final List<Integer> res = new ArrayList<>(2);
         if (count1 > n / 3) res.add(candidate1);
         if (count2 > n / 3) res.add(candidate2);
+
         return res;
     }
 }
