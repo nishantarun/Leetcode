@@ -12,6 +12,7 @@ class Solution {
                 count = 0;
             }
         }
-        return Math.max(count,maxCount);
+        maxCount = Math.max(count,maxCount);
+        return maxCount;
     }
 }
