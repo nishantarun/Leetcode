@@ -8,12 +8,10 @@ class Solution {
                 count++;
             }
             else {
-                if(count > maxCount) {
-                    maxCount = count;
-                }
+                maxCount = Math.max(count,maxCount);
                 count = 0;
             }
         }
-        return maxCount < count ? count : maxCount;
+        return Math.max(count,maxCount);
     }
 }
