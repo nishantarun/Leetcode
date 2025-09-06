@@ -3,7 +3,7 @@ class Solution {
         if(nums == null) return 0;
         int count = 0;
         int maxCount = count;
-        for(int i =0;i<nums.length;i++) {
+        for(int i =0; i<nums.length;i++) {
             if(nums[i] == 1){
                 count++;
             }
@@ -12,7 +12,6 @@ class Solution {
                 count = 0;
             }
         }
-        maxCount = Math.max(count,maxCount);
-        return maxCount;
+        return Math.max(count,maxCount);
     }
 }
