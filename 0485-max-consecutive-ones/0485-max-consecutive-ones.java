@@ -3,8 +3,8 @@ class Solution {
         if(nums == null) return 0;
         int count = 0;
         int maxCount = count;
-        for(int ele : nums) {
-            if(ele == 1){
+        for(int i =0;i<nums.length;i++) {
+            if(nums[i] == 1){
                 count++;
             }
             else {
