@@ -14,10 +14,8 @@ class Solution {
         }
         
         int[] rotatedBackArray = rotateBack(nums, drop);
-        Arrays.sort(nums);
-        int[] sortedArray = nums;
-        for(int i =0; i<nums.length; i++){
-            if(rotatedBackArray[i] != sortedArray[i]){
+        for(int i = 1; i< nums.length;i++) {
+            if(rotatedBackArray[i-1] > rotatedBackArray[i]){
                 return false;
             }
         }
