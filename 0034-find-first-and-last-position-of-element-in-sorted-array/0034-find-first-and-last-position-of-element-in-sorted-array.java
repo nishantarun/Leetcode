@@ -9,12 +9,10 @@ class Solution {
         while (left - 1 >= 0 && nums[left - 1] == target) {
             left--;
         }
-
-        // Expand right bound safely
         while (right + 1 < nums.length && nums[right + 1] == target) {
             right++;
         }
-        return new int[] {left, right};
+        return new int[] { left, right };
     }
 
     public int helper(int[] nums, int target, int start, int end) {
