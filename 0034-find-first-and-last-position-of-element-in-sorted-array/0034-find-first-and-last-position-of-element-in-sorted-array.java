@@ -1,31 +1,37 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int idx = helper(nums, target, 0, nums.length - 1);
-        if (idx == -1) {
-            return new int[] { -1, -1 };
-        }
-        int left = idx;
-        int right = idx;
-        while (left - 1 >= 0 && nums[left - 1] == target) {
-            left--;
-        }
-        while (right + 1 < nums.length && nums[right + 1] == target) {
-            right++;
-        }
-        return new int[] { left, right };
+        int[] res = {-1,-1};
+        int left = helper(nums, target, true);
+        int right = helper(nums, target, false);
+        res[0] = left;
+        res[1] = right;
+        return res;
     }
 
-    public int helper(int[] nums, int target, int start, int end) {
-        if (start > end) {
-            return -1;
+    public int helper(int[] nums, int target, boolean isSearchingLeft) {
+        int start = 0;
+        int end = nums.length-1;
+        int idx = -1;
+
+        while(start <= end) {
+            int mid = start + (end - start) /2;
+            
+            if(nums[mid] < target) {
+                start = mid+1;
+            }
+            else if(nums[mid] > target) {
+                end = mid-1;
+            }
+            else {
+                idx = mid;
+                if(isSearchingLeft) {
+                    end = mid -1;
+                }
+                else {
+                    start = mid +1;
+                }
+            }
         }
-        int mid = start + (end - start) / 2;
-        if (nums[mid] == target) {
-            return mid;
-        } else if (nums[mid] < target) {
-            return helper(nums, target, mid + 1, end);
-        } else {
-            return helper(nums, target, start, mid - 1);
-        }
+        return idx;
     }
 }
