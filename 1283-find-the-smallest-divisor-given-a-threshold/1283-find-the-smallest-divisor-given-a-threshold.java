@@ -1,8 +1,10 @@
 class Solution {
     public int smallestDivisor(int[] nums, int threshold) {
-        int max = Integer.MIN_VALUE;
+        int max = nums[0];
         for(int ele : nums){
-            max = Math.max(ele, max);
+            if(ele > max){
+                max = ele;
+            }
         }
         int start = 1;
         int end = max;
@@ -22,7 +24,7 @@ class Solution {
     public int divideSum(int[] nums, int d){
         int sum = 0;
         for(int ele : nums){
-            sum += (int)Math.ceil((double)ele/d);
+            sum += (ele + d - 1)/d;
         }
         return sum;
     }
