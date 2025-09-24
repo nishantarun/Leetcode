@@ -6,7 +6,7 @@ class Solution {
                 map.put(nums[i], i);
             }
             else {
-                if(Math.abs(i - map.get(nums[i])) <= k) {
+                if(i - map.get(nums[i]) <= k) {
                     return true;
                 }
                 map.put(nums[i], i);
