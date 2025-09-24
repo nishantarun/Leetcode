@@ -9,7 +9,7 @@ class Solution {
             }
             else {
                 int profit = prices[right] - prices[left];
-                maxProfit = Math.max(profit, maxProfit);
+                maxProfit = maxProfit > profit ? maxProfit : profit;
             }
             right++;
         }
