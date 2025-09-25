@@ -6,19 +6,19 @@ class Solution {
     public String helper(String s, int n) {
         if (n == 1)
             return s;
-        String res = "";
+        StringBuilder res = new StringBuilder();
         int count = 1;
         char c = s.charAt(0);
         for (int i = 1; i < s.length(); i++) {
             if (s.charAt(i) == c) {
                 count++;
             } else {
-                res = res + count + c;
+                res.append(count).append(c);
                 c = s.charAt(i);
                 count = 1;
             }
         }
-        res = res + count + c;
-        return helper(res, n - 1);
+        res.append(count).append(c);
+        return helper(res.toString(), n - 1);
     }
 }
