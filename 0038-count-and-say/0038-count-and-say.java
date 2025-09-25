@@ -4,21 +4,21 @@ class Solution {
     }
 
     public String helper(String s, int n) {
-        if(n == 1) return s;
+        if (n == 1)
+            return s;
         String res = "";
         int count = 1;
         char c = s.charAt(0);
-        for(int i = 1; i< s.length(); i++) {
-            if(s.charAt(i) == c) {
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
                 count++;
-            }
-            else {
+            } else {
                 res = res + count + c;
                 c = s.charAt(i);
                 count = 1;
             }
         }
         res = res + count + c;
-        return helper(res, n-1);
+        return helper(res, n - 1);
     }
 }
