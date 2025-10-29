@@ -19,6 +19,9 @@ class Solution {
         for (int i = idx; i < nums.length; i++) {
             if (i > idx && nums[i] == nums[i - 1])
                 continue;
+
+            if (nums[i] > target)
+                continue;
             curr.add(nums[i]);
             helper(sum + nums[i], curr, nums, target, i + 1);
             curr.remove(curr.size() - 1);
