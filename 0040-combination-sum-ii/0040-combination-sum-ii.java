@@ -20,7 +20,7 @@ class Solution {
             if (i > idx && nums[i] == nums[i - 1])
                 continue;
 
-            if (nums[i] > target)
+            if (nums[i] + sum > target)
                 continue;
             curr.add(nums[i]);
             helper(sum + nums[i], curr, nums, target, i + 1);
