@@ -2,46 +2,46 @@ class Solution {
     List<List<String>> res = new ArrayList<>();
 
     public List<List<String>> solveNQueens(int n) {
-        List<String> board = new ArrayList<>();
+        char[][] board = new char[n][n];
         for (int i = 0; i < n; i++) {
-            board.add(".".repeat(n));
+            for (int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
         }
-        NQueens(board, 0, n);
+        NQueens(board, 0);
         return res;
     }
 
-    public void NQueens(List<String> board, int row, int n) {
-        if (row == n) {
-            res.add(new ArrayList<>(board));
+    public void NQueens(char[][] board, int row) {
+        if (row == board.length) {
+            List<String> temp = new ArrayList<>();
+            for (int i = 0; i < board.length; i++) {
+                temp.add(new String(board[i]));
+            }
+            res.add(temp);
             return;
         }
 
-        for (int col = 0; col < n; col++) {
+        for (int col = 0; col < board.length; col++) {
             if (isSafe(board, row, col)) {
-                String curr = board.get(row);
-                char[] charr = curr.toCharArray();
-                charr[col] = 'Q';
-                board.set(row, new String(charr));
-
-                NQueens(board, row + 1, n);
-
-                charr[col] = '.';
-                board.set(row, new String(charr));
+                board[row][col] = 'Q';
+                NQueens(board, row + 1);
+                board[row][col] = '.';
             }
         }
     }
 
-    public boolean isSafe(List<String> board, int row, int col) {
+    public boolean isSafe(char[][] board, int row, int col) {
         for (int i = row - 1; i >= 0; i--) {
-            if (board.get(i).charAt(col) == 'Q')
+            if (board[i][col] == 'Q')
                 return false;
         }
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
-            if (board.get(i).charAt(j) == 'Q')
+            if (board[i][j] == 'Q')
                 return false;
         }
-        for (int i = row - 1, j = col + 1; i >= 0 && j < board.size(); i--, j++) {
-            if (board.get(i).charAt(j) == 'Q')
+        for (int i = row - 1, j = col + 1; i >= 0 && j < board.length; i--, j++) {
+            if (board[i][j] == 'Q')
                 return false;
         }
         return true;
