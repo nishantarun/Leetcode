@@ -11,16 +11,16 @@ class Solution {
         if (idx == -1) {
             idx = nums.length - 1;
         }
-        if (count == 2 * nums.length)
+        if (count == 2 * nums.length) {
             return;
+        }
 
-        
-            while (!stack.isEmpty() && nums[idx] >= stack.peek()) {
-                stack.pop();
-            }
-            res[idx] = stack.isEmpty() ? -1 : stack.peek();
-            stack.push(nums[idx]);
-        
+        while (!stack.isEmpty() && nums[idx] >= stack.peek()) {
+            stack.pop();
+        }
+        res[idx] = stack.isEmpty() ? -1 : stack.peek();
+        stack.push(nums[idx]);
+
         nextGreaterElement2(nums, idx - 1, count + 1, stack, res);
     }
 }
