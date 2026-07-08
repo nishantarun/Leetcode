@@ -1,8 +1,10 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        Stack<Integer> stack = new Stack<>();
         HashMap<Integer, Integer> map = new HashMap<>();
-        nextGreaterElement(nums2, nums2.length - 1, stack, map);
+        int[] nextGreaterArr = nextGreaterHelper(nums2);
+        for (int i = 0; i < nums2.length; i++) {
+            map.put(nums2[i], nextGreaterArr[i]);
+        }
         int[] ans = new int[nums1.length];
         for (int i = 0; i < nums1.length; i++) {
             ans[i] = map.get(nums1[i]);
@@ -10,19 +12,20 @@ class Solution {
         return ans;
     }
 
-    public void nextGreaterElement(int[] nums, int idx, Stack<Integer> stack, HashMap<Integer, Integer> map) {
-        if (idx < 0) {
-            return;
+    public int[] nextGreaterHelper(int[] arr) {
+        int[] res = new int[arr.length];
+        Deque<Integer> dq = new ArrayDeque<>();
+        for (int i = arr.length - 1; i >= 0; i--) {
+            while (!dq.isEmpty() && dq.peek() <= arr[i]) {
+                dq.pop();
+            }
+            if (dq.isEmpty()) {
+                res[i] = -1;
+            } else {
+                res[i] = dq.peek();
+            }
+            dq.push(arr[i]);
         }
-        while (!stack.isEmpty() && nums[idx] >= stack.peek()) {
-            stack.pop();
-        }
-        if (stack.isEmpty()) {
-            map.put(nums[idx], -1);
-        } else {
-            map.put(nums[idx], stack.peek());
-        }
-        stack.push(nums[idx]);
-        nextGreaterElement(nums, idx - 1, stack, map);
+        return res;
     }
 }
