@@ -1,19 +1,18 @@
 class Solution {
     public int findMin(int[] nums) {
-        return helper(nums, 0, nums.length-1);
-    }
-
-    public int helper(int[] nums, int start, int end) {
-        if(start == end) {
-            return nums[start];
+        int left = 0;
+        int right = nums.length - 1;
+        int ans = Integer.MAX_VALUE;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[left] <= nums[mid]) {
+                ans = Math.min(ans, nums[left]);
+                left = mid + 1;
+            } else {
+                ans = Math.min(ans, nums[mid]);
+                right = mid - 1;
+            }
         }
-        int mid = start + (end - start) / 2;
-        if(nums[mid] > nums[end]) {
-            return helper(nums, mid+1, end);
-        }
-        else {
-            return helper(nums, start, mid);
-        }
-
+        return ans;
     }
 }
