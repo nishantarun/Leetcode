@@ -4,10 +4,10 @@ class Solution {
     }
 
     public boolean helper(int[] nums, int target, int start, int end) {
+        int mid = start + (end - start) / 2;
         if (start > end) {
             return false;
         }
-        int mid = start + (end - start) / 2;
         if (nums[mid] == target) {
             return true;
         }
