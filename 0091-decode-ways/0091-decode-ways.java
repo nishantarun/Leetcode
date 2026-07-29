@@ -1,27 +1,23 @@
 class Solution {
     public int numDecodings(String s) {
-        int[] dp = new int[s.length()];
-        Arrays.fill(dp, -1);
-        return helper(s, s.length() - 1, dp);
-    }
-
-    public int helper(String s, int n, int[] dp) {
-        if (n < 0)
-            return 1;
-        if (n == 0)
-            return s.charAt(0) == '0' ? 0 : 1;
-        if (dp[n] != -1)
-            return dp[n];
-        int ways = 0;
-        if (s.charAt(n) != '0') {
-            ways += helper(s, n - 1, dp);
-        }
-        if (n > 0) {
-            int num = (s.charAt(n - 1) - '0') * 10 + (s.charAt(n) - '0');
-            if (num >= 10 && num <= 26) {
-                ways += helper(s, n - 2, dp);
+        int prev;
+        int prev2 = 1;
+        if (s.charAt(0) == '0')
+            prev = 0;
+        else
+            prev = 1;
+        for (int i = 1; i < s.length(); i++) {
+            int ways = 0;
+            if (s.charAt(i) != '0') {
+                ways += prev;
             }
+            int num = (s.charAt(i - 1) - '0') * 10 + (s.charAt(i) - '0');
+            if (num >= 10 && num <= 26) {
+                ways += prev2;
+            }
+            prev2 = prev;
+            prev = ways;
         }
-        return dp[n] = ways;
+        return prev;
     }
 }
