@@ -6,29 +6,28 @@ class Solution {
             sum += ele;
         }
 
-        if(sum % 2 != 0) return false;
-    
-        int[][] dp = new int[sum/2 + 1][n];
-        for(int[] row: dp) {
-            Arrays.fill(row, -1);
-        }
-        return solve(nums, sum / 2, n - 1, dp);
-    }
+        if (sum % 2 != 0)
+            return false;
 
-    public boolean solve(int[] nums, int target, int n, int[][] dp) {
-        if (n == 0) {
-            return nums[0] == target;
+        int[][] dp = new int[sum / 2 + 1][n];
+        for (int i = 0; i < n; i++) {
+            dp[0][i] = 1;
         }
-        if (target == 0) {
-            return true;
+        if (nums[0] <= sum / 2) {
+            dp[nums[0]][0] = 1;
         }
-        if(dp[target][n] != -1) return dp[target][n] == 1;
-        boolean notTake = solve(nums, target, n - 1, dp);
-        boolean take = false;
-        if (nums[n] <= target) {
-            take = solve(nums, target - nums[n], n - 1, dp);
+
+        for (int i = 1; i < n; i++) {
+            for (int target = 1; target <= sum / 2; target++) {
+                int notTake = dp[target][i - 1];
+                int take = 0;
+                if (nums[i] <= target) {
+                    take = dp[target - nums[i]][i - 1];
+                }
+                dp[target][i] = take | notTake;
+            }
         }
-        dp[target][n] = take || notTake ? 1: 0;
-        return take || notTake;
+
+        return dp[sum / 2][n - 1] == 1;
     }
 }
