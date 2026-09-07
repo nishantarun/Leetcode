@@ -1,19 +1,19 @@
 class StockSpanner {
-    public ArrayList<Integer> list;
+    public Deque<int[]> stack;
+    int currIdx = 0;
 
     public StockSpanner() {
-        list = new ArrayList<>();
+        stack = new ArrayDeque<>();
     }
 
     public int next(int price) {
-        list.add(price);
-        int count = 0;
-        int i = list.size() - 1;
-        while (i >= 0 && price >= list.get(i)) {
-            count++;
-            i--;
+        while (!stack.isEmpty() && price >= stack.peek()[1]) {
+            stack.pop();
         }
-        return count;
+        int ans = stack.isEmpty() ? currIdx + 1 : currIdx - stack.peek()[0];
+        stack.push(new int[] { currIdx, price });
+        currIdx++;
+        return ans;
     }
 }
 
