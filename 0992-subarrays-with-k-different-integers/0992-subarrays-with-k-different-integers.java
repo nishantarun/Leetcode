@@ -6,18 +6,19 @@ class Solution {
     }
 
     private int solver(int[] nums, int k) {
-        if (k < 0) {
-            return 0;
-        }
         int res = 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] freq = new int[nums.length + 1];
+        int distinct = 0;
         int left = 0;
         for (int right = 0; right < nums.length; right++) {
-            map.put(nums[right], map.getOrDefault(nums[right], 0) + 1);
-            while (map.size() > k) {
-                map.put(nums[left], map.get(nums[left]) - 1);
-                if (map.get(nums[left]) == 0) {
-                    map.remove(nums[left]);
+            if (freq[nums[right]] == 0) {
+                distinct++;
+            }
+            freq[nums[right]]++;
+            while (distinct > k) {
+                freq[nums[left]]--;
+                if (freq[nums[left]] == 0) {
+                    distinct--;
                 }
                 left++;
             }
